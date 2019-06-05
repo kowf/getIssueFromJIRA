@@ -7,7 +7,7 @@ import base64
 
 #read config
 
-with open("/getissue.yml", 'r') as stream:
+with open("getissue.yml", 'r') as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
