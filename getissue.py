@@ -60,7 +60,7 @@ if response['total']>0:
     #email--content
     msg = MIMEMultipart() 
 
-    msg['Subject'] = "New issue on +config['JIRA']['projectName']+ JIRA"
+    msg['Subject'] = "New issue on "+config['JIRA']['projectName']+" JIRA"
     msg['From']=config['mailing']['senderEmail']
     msg['To']=config['mailing']['mailingList']
 
