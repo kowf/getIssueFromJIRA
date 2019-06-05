@@ -1,0 +1,15 @@
+JIRA:
+    domain: https://???????????.atlassian.net
+    email: a?????????@???.com
+    token: qwe6r7q6re8w6re87w6e78wqrew
+    projectName: sthsth
+
+# units: d (day), h (hour), m (minute), s (second), remember to also change the scheduler
+frequency: 5m
+
+mailing:
+    host: smtp.gmail.com
+    port: 587
+    senderEmail: sthsth@gmail.com
+    password: sthsthsth
+    mailingList: sthsth@gmail.com, sthsth@sth.com, qwerty@sthsth.com
