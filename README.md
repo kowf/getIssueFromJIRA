@@ -1,6 +1,10 @@
 # getIssueFromJIRA
 get new issue from JIRA broad and send email for notification, with hard coded JQL 
 
+In order to run it, you need Python with pip installed, and then install the dependencies if not installed yet
+
+`pip install requests smtplib`
+
 Please edit getissue(fake).yml with your own credentials and preferences, and reaname it to getissue.yml
 
 Please use an external scheduling service to run it in interval
