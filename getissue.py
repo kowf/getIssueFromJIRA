@@ -7,7 +7,7 @@ import base64
 
 # read config
 
-with open("c:/Users/KathyKo/Desktop/getissue.yml", "r") as stream:
+with open("getissue.yml", 'r') as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
@@ -73,12 +73,9 @@ if response["total"] > 0:
 
     # email--content
     msg = MIMEMultipart()
-
-    msg["Subject"] = "New issue on OCCITPOT JIRA"
-    msg["From"] = config["mailing"]["senderEmail"]
-    msg["To"] = config["mailing"]["mailingList"]
-
-    msg.attach(MIMEText(content, "html"))
+    msg['Subject'] = "New issue on "+config['JIRA']['projectName']+" JIRA"
+    msg['From']=config['mailing']['senderEmail']
+    msg['To']=config['mailing']['mailingList']
 
     # email--connection
     mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
