@@ -4,10 +4,28 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import yaml
 import base64
+from datetime import datetime
+import time
+import math
+
+# read write run log
+
+with open("c:/Users/KathyKo/Desktop/runLog.txt", "a+") as f:
+    f.seek(0)
+    lineList = f.readlines()
+    now = datetime.now()
+    if lineList != []:
+        lastRun = datetime.strptime(lineList[-1][:-1], "%m/%d/%Y, %H:%M:%S")
+        missedOut = now - lastRun
+        timeToGet = str(math.ceil(missedOut.total_seconds())) + "s"
+    else:
+        timeToGet = "3d"
+    f.write(str(now.strftime("%m/%d/%Y, %H:%M:%S")) + "\n")
+
 
 # read config
 
-with open("getissue.yml", 'r') as stream:
+with open("getissue.yml", "r") as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
@@ -18,7 +36,7 @@ querystring = {
     "jql": "project='"
     + config["JIRA"]["projectName"]
     + "' and created > '-"
-    + config["frequency"]
+    + timeToGet
     + "'"
 }
 
@@ -26,7 +44,7 @@ secret = config["JIRA"]["email"] + ":" + config["JIRA"]["token"]
 
 auth = str(base64.b64encode(secret.encode("utf-8")), "utf-8")
 
-#Prepare for api call
+# Prepare for api call
 
 headers = {
     "Accept": "application/json",
@@ -70,22 +88,22 @@ if response["total"] > 0:
             </body>
         </html>
         """
-
+    print(content)
     # email--content
     msg = MIMEMultipart()
-    msg['Subject'] = "New issue on "+config['JIRA']['projectName']+" JIRA"
-    msg['From']=config['mailing']['senderEmail']
-    msg['To']=config['mailing']['mailingList']
+    msg["Subject"] = "New issue on " + config["JIRA"]["projectName"] + " JIRA"
+    msg["From"] = config["mailing"]["senderEmail"]
+    msg["To"] = config["mailing"]["mailingList"]
 
     # email--connection
-    mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
+# mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
 
-    mail.ehlo()
+# mail.ehlo()
 
-    mail.starttls()
+# mail.starttls()
 
-    mail.login(config["mailing"]["senderEmail"], config["mailing"]["password"])
+# mail.login(config["mailing"]["senderEmail"], config["mailing"]["password"])
 
-    mail.send_message(msg)
+# mail.send_message(msg)
 
-    mail.close()
+# mail.close()

@@ -4,9 +4,6 @@ JIRA:
     token: qwe6r7q6re8w6re87w6e78wqrew
     projectName: sthsth
 
-# units: d (day), h (hour), m (minute), s (second), remember to also change the scheduler
-frequency: 5m
-
 mailing:
     host: smtp.gmail.com
     port: 587
