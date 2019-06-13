@@ -10,7 +10,7 @@ import math
 
 # read write run log
 
-with open("c:/Users/KathyKo/Desktop/runLog.txt", "a+") as f:
+with open("runLog.txt", "a+") as f:
     f.seek(0)
     lineList = f.readlines()
     now = datetime.now()
