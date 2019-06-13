@@ -96,14 +96,14 @@ if response["total"] > 0:
     msg["To"] = config["mailing"]["mailingList"]
 
     # email--connection
-# mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
+    mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
 
-# mail.ehlo()
+    mail.ehlo()
 
-# mail.starttls()
+    mail.starttls()
 
-# mail.login(config["mailing"]["senderEmail"], config["mailing"]["password"])
+    mail.login(config["mailing"]["senderEmail"], config["mailing"]["password"])
 
-# mail.send_message(msg)
+    mail.send_message(msg)
 
-# mail.close()
+    mail.close()
