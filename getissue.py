@@ -17,7 +17,7 @@ with open("c:/Users/KathyKo/Desktop/runLog.txt", "a+") as f:
     if lineList != []:
         lastRun = datetime.strptime(lineList[-1][:-1], "%m/%d/%Y, %H:%M:%S")
         missedOut = now - lastRun
-        timeToGet = str(math.ceil(missedOut.total_seconds())) + "s"
+        timeToGet = str(math.ceil(missedOut.total_seconds() / 60)) + "m"
     else:
         timeToGet = "3d"
     f.write(str(now.strftime("%m/%d/%Y, %H:%M:%S")) + "\n")
@@ -25,7 +25,7 @@ with open("c:/Users/KathyKo/Desktop/runLog.txt", "a+") as f:
 
 # read config
 
-with open("getissue.yml", "r") as stream:
+with open("c:/Users/KathyKo/Desktop/getissue.yml", "r") as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
@@ -88,22 +88,24 @@ if response["total"] > 0:
             </body>
         </html>
         """
-    print(content)
+
     # email--content
     msg = MIMEMultipart()
     msg["Subject"] = "New issue on " + config["JIRA"]["projectName"] + " JIRA"
     msg["From"] = config["mailing"]["senderEmail"]
     msg["To"] = config["mailing"]["mailingList"]
 
+    msg.attach(MIMEText(content, "html"))
+
     # email--connection
-# mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
+    mail = smtplib.SMTP(config["mailing"]["host"], config["mailing"]["port"])
 
-# mail.ehlo()
+    mail.ehlo()
 
-# mail.starttls()
+    mail.starttls()
 
-# mail.login(config["mailing"]["senderEmail"], config["mailing"]["password"])
+    mail.login(config["mailing"]["senderEmail"], config["mailing"]["password"])
 
-# mail.send_message(msg)
+    mail.send_message(msg)
 
-# mail.close()
+    mail.close()
