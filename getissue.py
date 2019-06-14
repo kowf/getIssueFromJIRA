@@ -10,7 +10,7 @@ import math
 
 # read write run log
 
-with open("c:/Users/KathyKo/Desktop/runLog.txt", "a+") as f:
+with open("runLog.txt", "a+") as f:
     f.seek(0)
     lineList = f.readlines()
     now = datetime.now()
@@ -25,7 +25,7 @@ with open("c:/Users/KathyKo/Desktop/runLog.txt", "a+") as f:
 
 # read config
 
-with open("c:/Users/KathyKo/Desktop/getissue.yml", "r") as stream:
+with open("getissue.yml", "r") as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
