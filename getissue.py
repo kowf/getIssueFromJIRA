@@ -73,12 +73,14 @@ if response["total"] > 0:
             "summary": issue["fields"]["summary"],
             "priority": issue["fields"]["priority"]["name"],
             "status": issue["fields"]["status"]["name"],
+            "assignee": issue["fields"]["assignee"]["name"],
             "created": issue["fields"]["created"],
         }
+
         content += f"""\
             <a href={config['JIRA']['domain']}"""
         content += """/browse/{key}">{key}</a> 
-            <strong>Priority: </strong> {priority} <strong>Status: </strong>{status} <strong>Created: </strong>{created} 
+            <strong>Assignee: </strong> {assignee} <strong>Priority: </strong> {priority} <strong>Status: </strong>{status} <strong>Created: </strong>{created} 
             <div>{summary}</div><br>
         """.format_map(
             result
